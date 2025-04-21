@@ -1,0 +1,6 @@
+- name: Install moodle412
+  hosts: all                  # Целевые хосты (из инвентаря)
+  become: yes                 # Выполнять задачи с повышенными привилегиями
+  remote_user: root
+  roles:
+  - role: moodle412   # Подключение вашей роли

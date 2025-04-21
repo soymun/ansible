@@ -1,0 +1,22 @@
+- name: Удаляем репозиторий mooodle 4.1.2
+  file:
+    path: /var/www/html/moodle
+    state: absent
+
+
+
+- name: Копируем репозиторий moodle 4.5.2
+  git: 
+    repo: https://github.com/moodle/moodle.git
+    dest: /var/www/html/moodle
+    version:  MOODLE_405_STABLE
+    clone: yes
+
+- name: Copy config.php from server
+  template:
+    src:   config.php.j2
+    dest: /var/www/html/moodle/config.php
+    owner: root
+    group: root
+    mode: '0777'
+  notify: restart apache

@@ -1,0 +1,27 @@
+- name: Удаляем репозиторий mooodle 3.9
+  file:
+    path: /var/www/html/moodle
+    state: absent
+
+
+
+- name: Копируем репозиторий moodle 4.1.2
+  git: 
+    repo: https://github.com/moodle/moodle.git
+    dest: /var/www/html/moodle
+    version:  MOODLE_401_STABLE
+    clone: yes
+
+- name: edit files rules
+  ansible.builtin.file:
+    path: /var/www/html/moodle
+    mode: "0777"  # Права доступа в восьмеричном формат
+
+- name: Copy config.php from server
+  template:
+    src:   config.php.j2
+    dest: /var/www/html/moodle/config.php
+    owner: root
+    group: root
+    mode: '0777'
+  notify: restart apache

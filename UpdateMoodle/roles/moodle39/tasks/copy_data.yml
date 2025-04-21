@@ -1,0 +1,41 @@
+- name: Копируем репозиторий мудл
+  git: 
+    repo: https://github.com/moodle/moodle.git
+    dest: /var/www/html/moodle
+    version:  MOODLE_39_STABLE
+    clone: yes
+
+
+- name: edit files rules
+  ansible.builtin.file:
+    path: /var/www/html/moodle
+    mode: "0777"  # Права доступа в восьмеричном формат
+
+
+- name: Copy config.php from server
+  template:
+    src:   config.php.j2
+    dest: /var/www/html/moodle/config.php
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: Copy SQL from server
+  copy:
+    src: '{{path_to_SQL_file}}/{{name_sql_file}}'
+    dest: /var/opt/moodledump.sql
+    owner: root
+    group: root
+    mode: '0777'
+
+
+
+
+# - name: Copy moodledata from server
+#   copy:
+#     src: '{{path_to_moodledata}}'
+#     dest: /var
+#     owner: root
+#     group: root
+#     mode: '0777'
+#   notify: restart apache

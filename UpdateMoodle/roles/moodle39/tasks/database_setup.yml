@@ -1,0 +1,22 @@
+- name: Установка локального пользователя базы данных
+  command: mysql -u root -p"uit,ljpjh" -e "CREATE USER  '{{username}}'@'localhost' IDENTIFIED BY '{{password_user}}';"
+  ignore_errors: True
+  # when: user_check.rowcount == '0'
+  
+
+- name: Установка полных прав доступа для пользователя
+  command: mysql -u root -p"uit,ljpjh" -e "GRANT ALL PRIVILEGES ON *.* TO '{{username}}'@'localhost'; "
+  register: mysql_resltm
+  ignore_errors: True
+  # when: user_check.rowcount == '0'
+
+
+ 
+- name: Create database
+  command: mysql -u root -p"uit,ljpjh" -e "Create database moodle;"
+  register: mysql_resltm
+  ignore_errors: True 
+
+- name: Use SQL dump
+  shell: mysql -u root -p"uit,ljpjh" moodle < /var/opt/moodledump.sql
+  ignore_errors: True

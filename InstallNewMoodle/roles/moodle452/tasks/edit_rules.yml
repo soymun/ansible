@@ -1,0 +1,11 @@
+- name: edit php.ini file
+  ansible.builtin.lineinfile:
+    path: /etc/php/8.1/apache2/php.ini 
+    line: "max_input_vars=5000"
+
+- name: edit files rules 
+  ansible.builtin.file:
+    path: /var/www/html/moodle
+    mode: "0777"
+
+

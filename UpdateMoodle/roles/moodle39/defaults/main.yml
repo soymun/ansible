@@ -1,0 +1,8 @@
+
+username: user_moodle
+password_user : 123qwe!@#
+db_name: moodle_db
+path_to_config: /home/g614/data/config.php
+path_to_SQL_file: /home/g614/data/moodledump.sql
+path_to_moodledata:  /home/g614/data/moodledata3
+

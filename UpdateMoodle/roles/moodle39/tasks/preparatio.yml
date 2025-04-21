@@ -1,0 +1,39 @@
+- name: Изменение файла source.list
+  lineinfile:
+    path: /etc/apt/sources.list
+    line:  deb https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php/ bookworm main contrib non-free
+    state: present
+ 
+- name: add apt.gpg
+  copy:
+    src:  /home/g614/data/apt.gpg
+    dest: /etc/apt/trusted.gpg.d/apt.gpg
+    owner: root
+    group: root
+    mode: '0644'
+        
+ 
+    
+- name: Обновление кеша apt
+  apt:
+    update_cache: yes
+  
+- name: Install pip
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install PyMySQL
+  apt:
+    name: python3-pymysql
+    state: present
+
+
+- name: сreate directory
+  file:
+    path=/var/www/html/moodle
+    mode=0755
+    owner=root
+    group=root
+    state=directory
+  

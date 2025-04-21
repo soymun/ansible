@@ -1,0 +1,23 @@
+- name: Include prepararion tasks
+  include_tasks: roles/moodle39/tasks/preparatio.yml
+
+- name: Include install package tasks
+  include_tasks: roles/moodle39/tasks/install_package.yml
+
+- name: Include  copy_data
+  include_tasks: roles/moodle39/tasks/copy_data.yml
+
+- name: Include database setup
+  include_tasks: roles/moodle39/tasks/database_setup.yml
+
+
+
+
+# - name: Include install package tasks
+#   include: roles/moodle39/tasks/test_copy_config.yml
+#
+# - name: Iclude install package tasks
+#   include: install_package.yml
+
+
+

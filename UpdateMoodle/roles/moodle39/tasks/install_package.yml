@@ -1,0 +1,36 @@
+- name: Install required packages
+  apt:
+    name:
+      - git
+      - apache2
+      - mariadb-server
+      - unzip
+      - wget
+    state: present
+  ignore_errors: True
+
+       
+    # устанавливаем php пакеты 
+- name: Install php packages
+  apt:
+    name:
+      - php7.4 # or php depending on your system and desired version, Moodle 3.1.5 supports PHP 5.6.5+ to 7.1+
+      - php7.4-mysql
+      - php7.4-curl
+      - php7.4-gd
+      - php7.4-mbstring
+      - php7.4-xml
+      - php7.4-zip
+      - php7.4-intl
+      - php7.4-ldap
+      - libapache2-mod-php7.4
+    state: present
+  ignore_errors: True
+
+- name: Запустить сервис Apache2
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+  register: apache_status_output
+  notify: restart apache

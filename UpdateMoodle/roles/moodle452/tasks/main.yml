@@ -1,0 +1,22 @@
+
+- name: Include install package tasks
+  include: roles/moodle452/tasks/install_package.yml
+
+- name: Include edit rule task 
+  include: roles/moodle452/tasks/copy_data.yml
+
+- name: Include  copy_data task
+  include: roles/moodle452/tasks/edit_rules.yml
+
+
+
+
+
+# - name: Include install package tasks
+#   include: roles/moodle39/tasks/test_copy_config.yml
+#
+# - name: Iclude install package tasks
+#   include: install_package.yml
+
+
+

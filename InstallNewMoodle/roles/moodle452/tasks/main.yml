@@ -1,0 +1,17 @@
+- name: Include install mariadb
+  include: roles/moodle452/tasks/install_mariadb.yml.yml
+
+- name: Include install apache
+  include: roles/moodle452/tasks/install_apache.yml
+
+- name: Include install package tasks
+  include: roles/moodle452/tasks/install_package.yml
+
+- name: Include add moodle
+  include: roles/moodle452/tasks/copy_data.yml
+
+- name: Include edit rule
+  include: roles/moodle452/tasks/edit_rules.yml
+
+
+
