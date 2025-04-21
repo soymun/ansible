@@ -5,9 +5,10 @@
 
 - name: edit files rules 
   ansible.builtin.file:
-    path: /var/www/html/moodle
+    path: /var/www/
     mode: "0777"
     owner: www-data
     group: www-data
+  notify: restart apache
 
 

@@ -2,4 +2,5 @@ username: user_moodle
 password_user : 123qwe!@#
 db_name: moodle_db
 mysql_root_password: 123qwe!@#
+mariadb_root_password: 123qwe!@#
 name_moodledata_folder: moodledata

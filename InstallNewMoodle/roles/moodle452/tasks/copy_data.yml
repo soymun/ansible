@@ -10,11 +10,3 @@
     dest: /var/www/html/moodle
     version: MOODLE_405_STABLE
     clone: yes
-
-- name: "Создать папку /var/www/html/moodledata"
-  ansible.builtin.file:
-    path: /var/www/html/moodledata
-    state: directory
-    mode: '0777'  # права доступа (опционально)
-    owner: www-data  # владелец (обычно веб-сервер, опционально)
-    group: www-data  # группа (опционально)
