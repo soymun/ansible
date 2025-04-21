@@ -1,8 +1,8 @@
 - name: install mariadb
-  yum:
+  apt:
     name:
       - mariadb-server
-      - python3-PyMySQL
+      - python3-pymysql
     state: latest
 
 - name: start mariadb
@@ -13,12 +13,10 @@
 
 - name: set mysql root password
   mysql_user:
-    login_user: root
-    login_password: "{{ mysql_root_password }}"
     user: root
-    check_implicit_admin: true
     password: "{{ mysql_root_password }}"
-    host: localhost
+    login_unix_socket: /run/mysqld/mysqld.sock
+    host_all: yes
 
 - name: Create Moodle database
   mysql_db:

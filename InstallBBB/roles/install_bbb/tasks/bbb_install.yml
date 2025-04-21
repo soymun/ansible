@@ -9,15 +9,13 @@
 - name: Download and run BigBlueButton install script via wget
   shell: |
     wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | \
-    bash -s -- -w -v {{ bbb_version }} -s {{ bbb_hostname }} -e {{ bbb_email }} -g
+    bash -s -- -w -v {{ bbb_version }} -g
   args:
     executable: /bin/bash
 
 - name: Ensure firewall ports are open
   ufw:
-    rule: allow
-    port: "80,443,1935,7443,5066,3478,49152-65535/tcp"
-    comment: "BBB required ports"
+    state: reset
 
 - name: Get BigBlueButton API credentials
   shell: bbb-conf --secret

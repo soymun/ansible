@@ -1,6 +1,6 @@
 - name: Install moodle39
   hosts: all                  # Целевые хосты (из инвентаря)
   become: yes                 # Выполнять задачи с повышенными привилегиями
-  remote_user: root
+  remote_user: test
   roles:
   - role: moodle452    # Подключение вашей роли
