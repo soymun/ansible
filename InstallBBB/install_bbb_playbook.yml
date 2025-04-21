@@ -4,4 +4,3 @@
   remote_user: test
   roles:
   - role: install_bbb    # Подключение вашей роли
-    vars:
