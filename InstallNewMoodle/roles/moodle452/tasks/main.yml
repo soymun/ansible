@@ -1,5 +1,5 @@
 - name: Include install mariadb
-  include: roles/moodle452/tasks/install_mariadb.yml.yml
+  include: roles/moodle452/tasks/install_mariadb.yml
 
 - name: Include install apache
   include: roles/moodle452/tasks/install_apache.yml
