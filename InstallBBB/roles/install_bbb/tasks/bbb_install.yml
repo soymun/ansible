@@ -8,7 +8,7 @@
 
 - name: Download and run BigBlueButton install script via wget
   shell: |
-    wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | bash -s -- -w -v {{ bbb_version }} s {{ bbb_hostname }} -e {{ bbb_email }}
+    wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | bash -s -- -w -v {{ bbb_version }} -s {{ bbb_hostname }} -e {{ bbb_email }}
   args:
     executable: /bin/bash
 
