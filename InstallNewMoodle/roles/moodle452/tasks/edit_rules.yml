@@ -9,6 +9,13 @@
     mode: "0777"
     owner: www-data
     group: www-data
+
+- name: edit files rules
+  ansible.builtin.file:
+    path: /var/www/html/moodle
+    mode: "0777"
+    owner: www-data
+    group: www-data
   notify: restart apache
 
 - name: Add Moodle cron job for www-data user
