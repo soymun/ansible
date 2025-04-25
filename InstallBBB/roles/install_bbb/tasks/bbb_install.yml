@@ -6,11 +6,24 @@
     state: present
     update_cache: yes
 
-- name: Download and run BigBlueButton install script via wget
-  shell: |
-    wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | bash -s -- -w -v {{ bbb_version }} -s {{ bbb_hostname }} -e {{ bbb_email }}
+- name: Download BigBlueButton install script
+  get_url:
+    url: https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh
+    dest: /tmp/bbb-install.sh
+    mode: '0755'  # Даём права на выполнение
+    timeout: 30    # Таймаут на загрузку (секунды)
+    validate_certs: yes  # Проверка SSL-сертификата
+
+- name: Run BigBlueButton installation
+  command: /tmp/bbb-install.sh -w -v {{ bbb_version }} -s {{ bbb_hostname }} -e {{ bbb_email }}
   args:
-    executable: /bin/bash
+    chdir: /tmp  # Запускаем из /tmp (если скрипт создаёт временные файлы)
+  register: install_result
+  failed_when:
+    - install_result.rc != 0  # Проверяем код завершения
+    - "'already installed' not in install_result.stdout"  # Игнорируем, если уже установлен
+  async: 1800  # Максимальное время выполнения (30 минут)
+  poll: 10     # Проверка статуса каждые 10 секунд
 
 - name: Ensure firewall ports are open
   ufw:
