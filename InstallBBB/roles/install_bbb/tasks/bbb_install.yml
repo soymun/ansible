@@ -1,3 +1,23 @@
+- name: Install pyOpenSSL (required for openssl_certificate module)
+  ansible.builtin.apt:
+    name: python3-openssl
+    state: present
+
+- name: Ensure certs directory exists
+  ansible.builtin.file:
+    path: /local/certs
+    state: directory
+    mode: '0755'
+
+- name: Generate self-signed SSL certificate
+  ansible.builtin.openssl_certificate:
+    path: /local/certs/fullchain.pem
+    privatekey_path: /local/certs/privkey.pem
+    provider: selfsigned
+    selfsigned_not_after: +3650d
+    selfsigned_digest: sha256
+    selfsigned_common_name: "192.168.0.5"
+
 - name: Ensure wget is installed
   apt:
     name:
@@ -8,7 +28,7 @@
 
 - name: Download and run BigBlueButton install script via wget
   shell: |
-    wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | bash -s -- -w -v {{ bbb_version }} -s {{ bbb_hostname }} -e {{ bbb_email }}
+    wget -qO- https://raw.githubusercontent.com/bigbluebutton/bbb-install/v3.0.x-release/bbb-install.sh | bash -s -- -w -v {{ bbb_version }} -s {{ bbb_hostname }} -d
   args:
     executable: /bin/bash
   async: 1800  # Максимальное время выполнения (30 минут)
