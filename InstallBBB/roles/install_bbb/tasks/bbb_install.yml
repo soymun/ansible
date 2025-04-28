@@ -9,6 +9,13 @@
     state: directory
     mode: '0755'
 
+- name: Generate private key (RSA 2048)
+  ansible.builtin.openssl_privatekey:
+    path: /local/certs/privkey.pem
+    type: RSA
+    size: 2048
+    mode: '0755'  # Только для владельца
+
 - name: Generate self-signed SSL certificate
   ansible.builtin.openssl_certificate:
     path: /local/certs/fullchain.pem
@@ -16,7 +23,7 @@
     provider: selfsigned
     selfsigned_not_after: +3650d
     selfsigned_digest: sha256
-    selfsigned_common_name: {{ bbb_hostname }}
+    selfsigned_common_name: { { bbb_hostname } }
 
 - name: Ensure wget is installed
   apt:
