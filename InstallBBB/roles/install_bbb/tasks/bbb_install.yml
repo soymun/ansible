@@ -16,7 +16,7 @@
     provider: selfsigned
     selfsigned_not_after: +3650d
     selfsigned_digest: sha256
-    selfsigned_common_name: "192.168.0.5"
+    selfsigned_common_name: {{ bbb_hostname }}
 
 - name: Ensure wget is installed
   apt:
