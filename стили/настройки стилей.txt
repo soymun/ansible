@@ -1,0 +1,19 @@
+.yui3-datatable-table {
+    width: 100% !important;
+}
+
+.yui3-datatable-paginator {
+   width: 100% !important;
+}
+
+.yui3-datatable {
+   width: 100% !important;
+}
+
+.copyright {
+   visibility: hidden;
+}
+
+.yui3-datatable-table col {
+    width: auto;
+}
